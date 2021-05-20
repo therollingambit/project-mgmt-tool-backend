@@ -8,6 +8,9 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
+@Table(name = "project", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"projectId"})
+})
 public class Project {
 
     @Id
@@ -17,18 +20,18 @@ public class Project {
     private String projectName;
     @NotBlank(message = "Project id is required")
     @Size(min = 4, max = 5, message = "Please use 4 to 5 characters")
-    @Column(updatable = false, unique = true)
+    @Column(name = "projectId", updatable = false)
     private String projectId;
     @NotBlank(message = "Project description is required")
     private String description;
-    @JsonFormat(pattern = "yyy-mm-dd")
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private Date start_date;
-    @JsonFormat(pattern = "yyy-mm-dd")
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private Date end_date;
 
-    @JsonFormat(pattern = "yyy-mm-dd")
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private Date created_at;
-    @JsonFormat(pattern = "yyy-mm-dd")
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private Date updated_at;
 
     public Project() {
